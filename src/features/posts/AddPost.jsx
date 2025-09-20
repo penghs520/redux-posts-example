@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 
+import { addPost } from './postSlice';
+
 export const AddPost = () => {
 
     const [showAddPostForm, setShowAddPostForm] = useState(false);
@@ -34,7 +36,8 @@ export const AddPost = () => {
         // 保存文章的逻辑
         setPost({ title: '', content: '' });
         setShowAddPostForm(false);
-        dispatch({ type: 'posts/addPost', payload: { title: post.title, content: post.content } });
+        //dispatch({ type: 'posts/addPost', payload: { title: post.title, content: post.content } });
+        dispatch(addPost({ title: post.title, content: post.content }));
     }
 
     const addPostForm = (
