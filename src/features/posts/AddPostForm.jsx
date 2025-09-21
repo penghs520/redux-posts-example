@@ -37,7 +37,7 @@ export const AddPostForm = () => {
         setPost({ title: '', content: '' });
         setShowAddPostForm(false);
         //dispatch({ type: 'posts/addPost', payload: { title: post.title, content: post.content } });
-        dispatch(postAdded({ title: post.title, content: post.content }));
+        dispatch(postAdded(post.title, post.content));
     }
 
     const addPostForm = (
