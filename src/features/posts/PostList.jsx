@@ -11,6 +11,9 @@ export const PostList = () => {
       <Link to={`/posts/${post.id}`} className="button muted-button">
         View Post
       </Link>
+      <Link to={`/posts/${post.id}/edit`} className="button muted-button">
+        Edit Post
+      </Link>
     </article>
   ))
 

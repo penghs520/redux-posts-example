@@ -1,5 +1,5 @@
 
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export const SinglePostPage = () => {
@@ -15,6 +15,7 @@ export const SinglePostPage = () => {
             <section>
                 <h2>文章未找到!</h2>
                 <p>抱歉，无法找到所请求的文章!</p>
+                <Link to="/">返回首页</Link>
             </section>
         );
     }
@@ -24,6 +25,7 @@ export const SinglePostPage = () => {
             <article className="post">
                 <h2>{post.title}</h2>
                 <p>{post.content}</p>
+                <Link to="/">返回首页</Link>
             </article>
         </section>
     );
