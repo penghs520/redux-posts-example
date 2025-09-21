@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { postAdded } from './postSlice';
 
@@ -7,8 +7,13 @@ export const AddPostForm = () => {
 
     const [showAddPostForm, setShowAddPostForm] = useState(false);
     const [post, setPost] = useState({ title: '', content: '' });
+    const [userId, setUserId] = useState('');
 
     const dispatch = useDispatch();
+
+    const onUserIdChanged = e => setUserId(e.target.value);
+
+    const users = useSelector(state => state.users);
 
     //const debounceTimer = useRef(null);
 
@@ -32,12 +37,14 @@ export const AddPostForm = () => {
         setShowAddPostForm(false);
     }
 
+
+    const canSave = Boolean(post.title) && Boolean(post.content) && Boolean(userId);
+
     const onSaveClick = () => {
-        // 保存文章的逻辑
+        //dispatch({ type: 'posts/addPost', payload: { title: post.title, content: post.content } });
+        dispatch(postAdded(post.title, post.content, userId));
         setPost({ title: '', content: '' });
         setShowAddPostForm(false);
-        //dispatch({ type: 'posts/addPost', payload: { title: post.title, content: post.content } });
-        dispatch(postAdded(post.title, post.content));
     }
 
     const addPostForm = (
@@ -47,10 +54,20 @@ export const AddPostForm = () => {
                 <label htmlFor="postTitle">标题:</label>
                 <input type="text" id="postTitle" name="postTitle" value={post.title} onChange={onTitleChanged} />
 
+                <label htmlFor="postAuthor">作者:</label>
+                <select id="postAuthor" value={userId} onChange={onUserIdChanged}>
+                    {/* 默认不选中任何作者 */}
+                    <option value=""></option>
+                    {
+                        users.map(user => (
+                            <option key={user.id} value={user.id}>{user.name}</option>
+                        ))
+                    }
+                </select>
                 <label htmlFor="postContent">内容:</label>
                 <textarea id="postContent" name="postContent" value={post.content} onChange={onContentChanged}></textarea>
 
-                <button type="button" onClick={onSaveClick}>保存文章</button>
+                <button type="button" onClick={onSaveClick} disabled={!canSave}>保存文章</button>
                 <button type="button" onClick={onCancelClick}>取消</button>
 
             </form>
