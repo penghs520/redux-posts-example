@@ -1,10 +1,11 @@
 
 import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { ReactionButton } from "./ReactionButton";
 
 export const SinglePostPage = () => {
 
-   let { postId } = useParams();
+    let { postId } = useParams();
 
     const post = useSelector((state) =>
         state.posts.find((post) => post.id === postId)
@@ -25,6 +26,7 @@ export const SinglePostPage = () => {
             <article className="post">
                 <h2>{post.title}</h2>
                 <p>{post.content}</p>
+                <ReactionButton post={post} />
                 <Link to="/">返回首页</Link>
             </article>
         </section>
