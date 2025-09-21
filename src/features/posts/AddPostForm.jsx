@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { addPost } from './postSlice';
+import { postAdded } from './postSlice';
 
-export const AddPost = () => {
+export const AddPostForm = () => {
 
     const [showAddPostForm, setShowAddPostForm] = useState(false);
     const [post, setPost] = useState({ title: '', content: '' });
@@ -37,7 +37,7 @@ export const AddPost = () => {
         setPost({ title: '', content: '' });
         setShowAddPostForm(false);
         //dispatch({ type: 'posts/addPost', payload: { title: post.title, content: post.content } });
-        dispatch(addPost({ title: post.title, content: post.content }));
+        dispatch(postAdded({ title: post.title, content: post.content }));
     }
 
     const addPostForm = (

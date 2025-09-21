@@ -10,7 +10,7 @@ const postSlice = createSlice({
   name: 'posts',
   initialState: initState,
   reducers: {
-    addPost: (state, action) => {
+    postAdded: (state, action) => {
       const { title, content } = action.payload
       const newPost = {
         id: nanoid(),
@@ -22,6 +22,6 @@ const postSlice = createSlice({
   },
 })
 
-export const { addPost } = postSlice.actions
+export const { postAdded } = postSlice.actions
 
 export default postSlice.reducer
